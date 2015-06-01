@@ -25,4 +25,6 @@ Unityちゃんの迷路ゲーム
 * UnityちゃんのスクリプトにOnGoalメソッドを追加
 * OnGoal メソッドに this.enable = false; を追加し、ゴール後は動かないように
 
-## STEP 04 
+## STEP 04 落ちたらゲームオーバー
+* Unityちゃんのスクリプトにゲームオーバーの処理を追加
+
