@@ -197,5 +197,10 @@ namespace UnityChan
 			col.height = orgColHight;
 			col.center = orgVectColCenter;
 		}
+
+		void OnGoal(){
+			anim.SetBool("Goal", true);
+			this.enabled = false;
+		}
 	}
 }

@@ -14,5 +14,15 @@ Unityちゃんの迷路ゲーム
 
 * Plane作成
 * Material貼り付け
-* Unityちゃんをステージへ
+* Unityちゃんをステージへ（unitychan_dynamic_locomotion)
 * Package に入っている Main Cameraへ切り替え
+
+## STEP 03 ゴールの処理
+
+* ゴールを表現するダミーのSphere作成、Colliderアタッチ、OnTriggerオン
+* Goal.cs 作成＆アタッチ
+* UnityちゃんのAnimatorControllerを編集
+* UnityちゃんのスクリプトにOnGoalメソッドを追加
+* OnGoal メソッドに this.enable = false; を追加し、ゴール後は動かないように
+
+## STEP 04 
