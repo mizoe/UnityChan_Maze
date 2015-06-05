@@ -27,7 +27,8 @@ namespace UnityChan
 			}
 			isKeepFace = GUILayout.Toggle (isKeepFace, " Keep Face");
 			GUILayout.EndArea ();
-*/		}
+*/
+		}
 
 		float current = 0;
 

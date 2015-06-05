@@ -77,7 +77,12 @@ namespace UnityChan
 			currentBaseState = anim.GetCurrentAnimatorStateInfo (0);	// 参照用のステート変数にBase Layer (0)の現在のステートを設定する
 			rb.useGravity = true;//ジャンプ中に重力を切るので、それ以外は重力の影響を受けるようにする
 		
-		
+			//ゲームオーバー判定
+			float y = gameObject.transform.position.y;
+			if(y < -5){
+				Debug.Log("GAME OVER");
+				Application.LoadLevel("GameOver");
+			}
 		
 			// 以下、キャラクターの移動処理
 			velocity = new Vector3 (0, 0, v);		// 上下のキー入力からZ軸方向の移動量を取得
@@ -119,9 +124,9 @@ namespace UnityChan
 					resetCollider ();
 				}
 			}
-		// JUMP中の処理
-		// 現在のベースレイヤーがjumpStateの時
-		else if (currentBaseState.nameHash == jumpState) {
+			// JUMP中の処理
+			// 現在のベースレイヤーがjumpStateの時
+			else if (currentBaseState.nameHash == jumpState) {
 				cameraObject.SendMessage ("setCameraPositionJumpView");	// ジャンプ中のカメラに変更
 				// ステートがトランジション中でない場合
 				if (!anim.IsInTransition (0)) {
@@ -155,9 +160,9 @@ namespace UnityChan
 					anim.SetBool ("Jump", false);
 				}
 			}
-		// IDLE中の処理
-		// 現在のベースレイヤーがidleStateの時
-		else if (currentBaseState.nameHash == idleState) {
+			// IDLE中の処理
+			// 現在のベースレイヤーがidleStateの時
+			else if (currentBaseState.nameHash == idleState) {
 				//カーブでコライダ調整をしている時は、念のためにリセットする
 				if (useCurves) {
 					resetCollider ();
@@ -167,9 +172,9 @@ namespace UnityChan
 					anim.SetBool ("Rest", true);
 				}
 			}
-		// REST中の処理
-		// 現在のベースレイヤーがrestStateの時
-		else if (currentBaseState.nameHash == restState) {
+			// REST中の処理
+			// 現在のベースレイヤーがrestStateの時
+			else if (currentBaseState.nameHash == restState) {
 				//cameraObject.SendMessage("setCameraPositionFrontView");		// カメラを正面に切り替える
 				// ステートが遷移中でない場合、Rest bool値をリセットする（ループしないようにする）
 				if (!anim.IsInTransition (0)) {
@@ -203,5 +208,17 @@ namespace UnityChan
 			anim.SetBool("Goal", true);
 			this.enabled = false;
 		}
+
+		
+		void OnCollisionStay(Collision c){
+			if(c.gameObject.tag == "Floor"){
+				transform.parent = c.gameObject.transform;
+			}
+		}
+
+		void OnCollisionExit(Collision c){
+			transform.parent = null;
+		}
+
 	}
 }
